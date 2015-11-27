@@ -2,7 +2,6 @@ package com.jdk2010.framework.web.session.redis;
 
 import java.io.Serializable;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -11,6 +10,11 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 
 public class RedisHttpSession implements HttpSession, Serializable {
+    
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     protected long creationTime = 0L;
 
@@ -25,6 +29,8 @@ public class RedisHttpSession implements HttpSession, Serializable {
     private Map<String, Object> data;
 
     protected transient boolean isNew; // Session新建标志
+    
+    protected transient boolean expired;  //过期标志
 
     public RedisHttpSession() {
         this.data = new ConcurrentHashMap<String, Object>();
@@ -127,6 +133,8 @@ public class RedisHttpSession implements HttpSession, Serializable {
     @Override
     public void invalidate() {
         System.out.println("===================失效==================="+this.getId());
+        this.expired=true;
+        
     }
 
     /**

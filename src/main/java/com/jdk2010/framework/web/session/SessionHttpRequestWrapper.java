@@ -1,5 +1,7 @@
 package com.jdk2010.framework.web.session;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
@@ -13,19 +15,27 @@ public class SessionHttpRequestWrapper extends HttpServletRequestWrapper {
     RedisHttpSession httpSession;
 
     private HttpServletResponse response;
-    
+
     private RedisSessionManager redisSessionManager;
 
-    public SessionHttpRequestWrapper(HttpServletRequest request, HttpServletResponse response,RedisSessionManager redisSessionManager) {
+    public SessionHttpRequestWrapper(HttpServletRequest request, HttpServletResponse response,
+            RedisSessionManager redisSessionManager) {
         super(request);
         this.response = response;
-        this.redisSessionManager=redisSessionManager;
+        this.redisSessionManager = redisSessionManager;
     }
 
     public HttpSession getSession(boolean create) {
-        if (this.httpSession != null)
+        System.out.println(this.httpSession != null);
+        if (this.httpSession != null){
             return this.httpSession;
-        this.httpSession = this.redisSessionManager.createSession(this,this.response,create);
+        }
+        try {
+            this.httpSession = this.redisSessionManager.createSession(this, this.response, create);
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return this.httpSession;
     }
 

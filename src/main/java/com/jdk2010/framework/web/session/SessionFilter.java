@@ -21,7 +21,7 @@ public class SessionFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        sessionManager = new RedisSessionManager("10.19.40.39", 6379);
+        sessionManager = new RedisSessionManager("10.19.40.46", 6379);
     }
 
     @Override
