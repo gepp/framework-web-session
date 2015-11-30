@@ -2,6 +2,7 @@ package com.jdk2010.framework.web.session.redis;
 
 import java.io.Serializable;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -33,7 +34,7 @@ public class RedisHttpSession implements HttpSession, Serializable {
     protected transient boolean expired;  //过期标志
 
     public RedisHttpSession() {
-        this.data = new ConcurrentHashMap<String, Object>();
+        this.data = new HashMap<String, Object>();
     }
 
     /**
@@ -109,6 +110,8 @@ public class RedisHttpSession implements HttpSession, Serializable {
 
     @Override
     public void setAttribute(String name, Object value) {
+        System.out.println("name:"+name);
+        System.out.println("value:"+value);
         this.data.put(name, value);
     }
 

@@ -1,5 +1,6 @@
 package com.jdk2010.framework.web.session;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,13 +28,14 @@ public class SessionHttpRequestWrapper extends HttpServletRequestWrapper {
 
     public HttpSession getSession(boolean create) {
         System.out.println(this.httpSession != null);
-        if (this.httpSession != null){
+        if (this.httpSession != null) {
             return this.httpSession;
         }
         try {
             this.httpSession = this.redisSessionManager.createSession(this, this.response, create);
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return this.httpSession;
