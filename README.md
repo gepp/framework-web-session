@@ -8,4 +8,18 @@
 
 技术:序列化使用kryo,代替jdk自带的序列化
            包装HttpServletRequestWrapper
-    
+	配置文件如下
+	#redis服务器IP
+	redisIp=10.19.40.52
+	#redis 端口
+	redisPort=6379
+	#session失效时间
+	sessionTimeoutSeconds=1800
+	#session与redis 超过时间同步
+	sessionIgnoreSeconds=300
+后期
+	redis集群
+	memcached实现
+	
+	
+	
