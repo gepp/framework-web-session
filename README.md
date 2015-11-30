@@ -8,7 +8,7 @@
 
 技术:序列化使用kryo,代替jdk自带的序列化 <br/>
            包装HttpServletRequestWrapper <br/>
-	配置文件如下 <br/>
+	配置文件如下,放于resources下，即/WEB-INF/classes/session.properties<br/>
 	#redis服务器IP <br/>
 	redisIp=10.19.40.52 <br/>
 	#redis 端口 <br/>
